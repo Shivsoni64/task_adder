@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .todo-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        li {
+            padding: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .completed {
+            text-decoration: line-through;
+            color: #999;
+        }
+        
+        .delete-button {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 3px 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <input type="text" id="taskInput" placeholder="Add a new task">
+        <button id="addTask">Add</button>
+        <ul id="taskList">
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#addTask').click(function () {
+                var taskText = $('#taskInput').val();
+                if (taskText !== "") {
+                    var taskItem = $('<li>' + taskText + '<button class="delete-button">Delete</button></li>');
+                    $('#taskList').append(taskItem);
+                    $('#taskInput').val("");
+                }
+            });
+        
+            // Mark tasks as completed
+            $('#taskList').on('click', 'li', function () {
+                $(this).toggleClass('completed');
+            });
+        
+            // Delete tasks
+            $('#taskList').on('click', '.delete-button', function () {
+                $(this).parent().remove();
+            });
+        });
+        
+
+    </script>
+</body>
+</html>
